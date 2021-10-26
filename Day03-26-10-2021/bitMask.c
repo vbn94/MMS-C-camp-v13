@@ -15,7 +15,7 @@ int checkBit(uint8_t mask, unsigned bit){
 }
 
 
-int8_t invertBit(uint8_t mask, unsigned bit){
+uint8_t invertBit(uint8_t mask, unsigned bit){
     return mask ^ (1 << bit);
 }
 
