@@ -17,13 +17,23 @@ int floatCompare3(float a, float b){
 }
 
 int main(void){
-    float a = 10.0f * 0.1f;
+    float a = 1000.0f * 0.1f;
     float b = 0.0f;
-    for (int i = 0; i < 10; i++, b += 0.1f);
-    if (floatCompare3(a, b)){
-        printf("Equals\n");
+    for (int i = 0; i < 1000; i++, b += 0.1f);
+    if (floatCompare1(a, b)){
+        printf("== Equals\n");
     } else {
-        printf("Not equals\n");
+        printf("== Not equals\n");
+    }
+    if (floatCompare2(a, b)){
+        printf("fixed E: Equals\n");
+    } else {
+        printf("fixed E: Not equals\n");
+    }
+    if (floatCompare3(a, b)){
+        printf("Adaptive E: Equals\n");
+    } else {
+        printf("Adaptive E: Not equals\n");
     }
     return 0;
 }
