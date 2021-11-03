@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdint.h>
+#include <math.h>
 #define LEN(arr) (sizeof(arr)/sizeof(*arr))
 
 int compareInt1(const void* a, const void* b){
@@ -35,7 +36,7 @@ void swap(int* a, int *b){
 }
 
 void swapUni(void* a, void *b, size_t size){
-    char temp[size];
+    uint8_t temp[size];
     memmove(temp, a, size);
     memmove(a, b, size);
     memmove(b, temp, size);
@@ -71,24 +72,51 @@ void* linearSearch(const void* key, void* arr, size_t nitems, size_t size, int (
     return NULL;
 }
 
-int main(void){
-    int arr[] = { 10, 20, 3, 3, 3, -5, 3, 6, 7, 8, 22, -3 };
-   // qsort(arr, LEN(arr), sizeof(int), compareInt1);
-    int key = 3000;
+typedef struct {
+    char marka[100];
+    int maxspeed;
+    double price;
+} car;
 
-    int* element = (int*)linearSearch(&key, arr, LEN(arr), sizeof(int), compareInt1);
-   
-    if (element == NULL){
-        printf("Not found!\n");
-    } else {
-        printf("Found: %d\n", *(element));
+typedef struct {
+    double x;
+    double y;
+} point;
+
+double distance(point p1, point p2){
+    return sqrt((p1.x - p2.x)*(p1.x - p2.x) + (p1.y - p2.y)*(p1.y - p2.y));
+}
+
+double mhdistance(point p1, point p2){
+    return fabs(p1.x - p2.x) + fabs(p1.y - p2.y); 
+}
+
+point translate(point p, double x, double y){
+    point result;
+    result.x = p.x + x;
+    result.y = p.y + y;
+    return result;
+}
+
+void printCars(car* arr, size_t n){
+    for (int i = 0; i < n; i++){
+        printf("Marka: %s, Max speed: %d, Price %.2lf\n", arr[i].marka, arr[i].maxspeed, arr[i].price);
     }
+}
 
+int compareCar(const void* a, const void* b){
+    car* car1 = (car*)a;
+    car* car2 = (car*)b;
+    return strcmp(car2->marka, car1->marka);
+}
 
-    //double reals[] = { 23.34, 43.45, 4, -44.5, 3.1415, 45 };
-
-   // bubbleSort(reals, LEN(reals), sizeof(double), compareDouble);
-    //printArray(reals, LEN(reals));
- 
+int main(void){
+    car cars[] = { {"Opel", 200, 2000.00}, 
+                   {"Honda", 230, 5040.20},
+                    {"Moskvich", 350, 230.30},
+                    {"Ford", 345, 3450.34},
+                    {"Trabant", 120, 100} };
+    bubbleSort(cars, LEN(cars), sizeof(car), compareCar);
+    printCars(cars, LEN(cars));
     return 0;
 }
