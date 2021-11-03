@@ -60,13 +60,35 @@ void bubbleSort(void* arr, size_t nmemb, size_t size, int (*cmp)(const void*,con
     }
 } // broi 1 ->>>>>   0b1000000, 0b0000011, 0x0f, 0xaf, 0xffff.......
 
-int main(void){
-    //int arr[] = { 10, 20, 3, 3, 3, -5, 3, 6, 7, 8, 22, -3 };
-    // qsort(arr, LEN(arr), sizeof(int), compareInt1);
-    double reals[] = { 23.34, 43.45, 4, -44.5, 3.1415, 45 };
 
-    bubbleSort(reals, LEN(reals), sizeof(double), compareDouble);
-    printArray(reals, LEN(reals));
+
+void* linearSearch(const void* key, void* arr, size_t nitems, size_t size, int (*cmp)(const void* a, const void* b)){
+    for (int i = 0; i < nitems * size; i += size){
+        if (cmp(arr + i, key) == 0){
+            return arr + i;
+        }
+    }
+    return NULL;
+}
+
+int main(void){
+    int arr[] = { 10, 20, 3, 3, 3, -5, 3, 6, 7, 8, 22, -3 };
+   // qsort(arr, LEN(arr), sizeof(int), compareInt1);
+    int key = 3000;
+
+    int* element = (int*)linearSearch(&key, arr, LEN(arr), sizeof(int), compareInt1);
+   
+    if (element == NULL){
+        printf("Not found!\n");
+    } else {
+        printf("Found: %d\n", *(element));
+    }
+
+
+    //double reals[] = { 23.34, 43.45, 4, -44.5, 3.1415, 45 };
+
+   // bubbleSort(reals, LEN(reals), sizeof(double), compareDouble);
+    //printArray(reals, LEN(reals));
  
     return 0;
 }
