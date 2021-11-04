@@ -110,13 +110,41 @@ int compareCar(const void* a, const void* b){
     return strcmp(car2->marka, car1->marka);
 }
 
+void quickSort(int* arr, int size){
+    if (size > 1){
+        int pivot = arr[rand() % size];
+
+        int left = 0;
+        for (int i = 0; i < size; i++){
+            if (arr[i] < pivot){
+                swap(&arr[i], &arr[left++]);
+            }
+        }
+        quickSort(arr, left);
+
+        int right = size - 1;
+        for (int i = size - 1; i >= left; i--){
+            if (arr[i] > pivot){
+                swap(&arr[i], &arr[right--]);
+            }
+        }
+        quickSort(arr + right + 1, size - right - 1);
+    }
+}
+
 int main(void){
-    car cars[] = { {"Opel", 200, 2000.00}, 
+    /*car cars[] = { {"Opel", 200, 2000.00}, 
                    {"Honda", 230, 5040.20},
                     {"Moskvich", 350, 230.30},
                     {"Ford", 345, 3450.34},
                     {"Trabant", 120, 100} };
     bubbleSort(cars, LEN(cars), sizeof(car), compareCar);
-    printCars(cars, LEN(cars));
+    printCars(cars, LEN(cars));*/
+    int arr[] = {10, 20, 34, 5, 55, 332, 43 };
+    quickSort(arr, LEN(arr));
+    for (int i = 0; i < LEN(arr); i++){
+        printf("%d ", arr[i]);
+    }
+    putchar('\n');
     return 0;
 }
