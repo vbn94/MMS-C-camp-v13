@@ -31,7 +31,6 @@ int** addMatrix(int** A, int** B, size_t n, size_t m){
     }
     return R;
 }
-
 int** multMatrix(int** A, int** B, size_t na, size_t ma, size_t nb, size_t mb){
     if (ma != nb){
         return NULL;
@@ -62,13 +61,6 @@ void printMatrix(int** A, size_t n, size_t m){
 }
 
 int main(){
-
-    printMatrix(C, 2, 2);
-
-    for (int i = 0;  i < 2; i++){
-        free(C[i]);
-    }
-    free(C);
 /*
     int** matrix2 = malloc(N * sizeof(int*));
 
