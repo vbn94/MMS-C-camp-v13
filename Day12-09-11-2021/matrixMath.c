@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#define N 10
+#define N 4
 #define M 4
 
 int** scalarMult(int** A, size_t n, size_t m, int num){
@@ -32,21 +32,44 @@ int** addMatrix(int** A, int** B, size_t n, size_t m){
     return R;
 }
 
-
-int main(){
-    int i, j;
-    int** matrix = malloc(N * sizeof(int*));
-
-    for (i = 0; i < N; i++){
-        *(matrix + i) = malloc(M * sizeof(int));
+int** multMatrix(int** A, int** B, size_t na, size_t ma, size_t nb, size_t mb){
+    if (ma != nb){
+        return NULL;
+    }
+    int** C = malloc(sizeof(int*) * na);
+    for (int i = 0; i < na; i++){
+        C[i] = calloc(mb, sizeof(int));
     }
 
-    for (i = 0; i < N; i++){
-        for (j = 0; j < M; j++){
-            *(*(matrix+i)+j) = rand() % 10; // matrix[i][j] = 
+    for (int i = 0; i < na; i++){
+        for (int j = 0; j < mb; j++){
+            for (int k = 0; k < nb; k++){
+                C[i][j] += A[i][k] * B[k][j]; 
+            }
         }
     }
+    return C;
+}
 
+
+void printMatrix(int** A, size_t n, size_t m){
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < m; j++){
+            printf("%2d ", A[i][j]);
+        }
+        putchar('\n');
+    }
+}
+
+int main(){
+
+    printMatrix(C, 2, 2);
+
+    for (int i = 0;  i < 2; i++){
+        free(C[i]);
+    }
+    free(C);
+/*
     int** matrix2 = malloc(N * sizeof(int*));
 
     for (i = 0; i < N; i++){
@@ -65,9 +88,6 @@ int main(){
         free(matrix3[i]);
     }
     free(matrix3);
-
-    int arr[10];
-    printf("%p \n", arr);
-    printf("%p \n", &arr);
+*/
     return EXIT_SUCCESS;
 }
