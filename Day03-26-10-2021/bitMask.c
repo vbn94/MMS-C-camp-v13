@@ -32,7 +32,7 @@ void printBits(uint8_t mask){
 }
 
 int main(){
-    uint8_t myMask = 0x00;
+    uint8_t myMask = 0x00ll;
     printf("Initial bit mask:\n");
     printBits(myMask);
     myMask = setBit(myMask, 0);

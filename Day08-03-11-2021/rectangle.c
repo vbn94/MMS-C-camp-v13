@@ -16,11 +16,6 @@ typedef struct {
     point b;
 } rect;
 
-void printRectagles(rect* arr, size_t n){
-    for (int i = 0; i < n; i++){
-        printf("A(%.1lf,%.1lf), B(%.1lf,%.1lf)\n", arr[i].a.x, arr[i].a.y, arr[i].b.x, arr[i].b.y);
-    }
-}
 
 
 void addValue(point* p){
@@ -62,6 +57,9 @@ int mult(int a, int b){
 }
 
 int mod(int a, int b){
+
+    char* str1, str2;
+    char *s1, s2; 
     return a % b;
 }
 
@@ -77,7 +75,7 @@ double sumArr(double* arr, size_t n){
     return sum;
 }
 
-double maxArr(double* arr, size_t n){
+double maxArr(double * arr, size_t n){
     double max = arr[0];
     for (int i = 1; i < n; i++){
         max = max < arr[i] ? arr[i] : max;
@@ -150,7 +148,7 @@ int strsizeR(const char* str){
     return 1 + strsizeR(str + 1);
 }
 
-int searchChar(const char* str, char key){
+int searchChar(const char *str, char key){
     if (*str == '\0'){
         return 0;
     }
@@ -163,4 +161,10 @@ int randInt(int min, int max){
 
 double randReal(double min, double max){
     return min + ((double)rand() / RAND_MAX) * (max - min);
+}
+
+void printRectagles(rect* arr, size_t n){
+    for (int i = 0; i < n; i++){
+        printf("A(%.1lf,%.1lf), B(%.1lf,%.1lf)\n", arr[i].a.x, arr[i].a.y, arr[i].b.x, arr[i].b.y);
+    }
 }

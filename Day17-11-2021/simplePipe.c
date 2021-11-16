@@ -6,7 +6,7 @@
 
 int main(void){
     int fd[2];
-    pipe(fd);
+    pipe(fd); // fd[0] -> reading, fd[1] -> writing
     pid_t pid = fork();
 
     if(pid == -1){

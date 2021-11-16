@@ -37,9 +37,8 @@ int pop(stack_t* stack, int* value){
 }
 
 int peek(stack_t* stack, int *value){
-    *value = stack->arr[stack->top--];
     if(isEmpty(stack)){
         return -1;
     }
-    *value = stack->arr[stack->top--];
+    *value = stack->arr[stack->top];
 }

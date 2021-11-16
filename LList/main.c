@@ -5,8 +5,24 @@
 
 #define N 10
 
+unsigned sumDigits(unsigned num){
+    unsigned sum = 0;
+    while (num != 0){
+        sum += num % 10;
+        num /= 10;
+    }
+    return sum;
+}
+
+unsigned digitalRoot(unsigned num){
+    if (num < 10){
+        return num;
+    }
+    digitalRoot(sumDigits(num));
+}
+
 int compare(int a, int b){
-    return b - a;
+    return digitalRoot(b) - digitalRoot(a);
 }
 
 int main(void){

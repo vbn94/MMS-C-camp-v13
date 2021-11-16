@@ -71,6 +71,14 @@ void freeList(node_t **list){
     *list = NULL;
 }
 
+void printListR(node_t* list){
+    if (list == NULL){
+        return;
+    }
+    printListR(list->next);
+    printf("%d ", list->data);
+}
+
 int main(){
     node_t* myList = NULL;
     pop(&myList);
@@ -82,8 +90,7 @@ int main(){
         printf("List is empty!\n");
         exit(EXIT_FAILURE);
     }
-    printList(myList);
-    printList(myList);
+    printListR(myList);
    // printf("Sum = %d\n", sumList(myList));
     
     freeList(&myList);

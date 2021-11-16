@@ -8,18 +8,18 @@
 #define MESSAGE "Hello world"
 #define MESSAGE_LENGTH sizeof(MESSAGE)
 
-int main(void)
-{
+int main(void){
     char *message = mmap(NULL, MESSAGE_LENGTH, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     int* i = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-    if (MAP_FAILED == message)
-    {
+    if (MAP_FAILED == message){
         perror("mmap");
         exit(EXIT_FAILURE);
     }
-
-    switch (fork())
-    {
+    if (MAP_FAILED == i){
+        perror("mmap");
+        exit(EXIT_FAILURE);
+    }
+    switch (fork()){
     case -1:
         perror("fork");
         exit(EXIT_FAILURE);
@@ -30,8 +30,7 @@ int main(void)
         exit(EXIT_SUCCESS);
 
     default:
-        if (-1 == wait(NULL))
-        {
+        if (-1 == wait(NULL)){
             perror("wait");
             exit(EXIT_FAILURE);
         }
