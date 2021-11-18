@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
     
     if (pid1 == 0) {
         // Child process 1 (ping)
-        dup2(fd[1], STDOUT_FILENO);
         close(fd[0]);
+        dup2(fd[1], STDOUT_FILENO);
         close(fd[1]);
         execlp("ping", "ping", "-c", "5", "google.com", NULL);
     }

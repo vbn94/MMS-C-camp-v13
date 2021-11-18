@@ -15,12 +15,12 @@ void stopFun(){
 int main(void){
     struct sigaction sa;
     sa.sa_handler = printStop;
-    sigaction(SIGINT, &sa, NULL);
+    sigaction(SIG, &sa, NULL);
     
+    //
     signal(SIGTSTP, stopFun);
     while (1){
         printf("Hello\n");
         sleep(1);
     }
-    kill();
 }
